@@ -1,0 +1,10 @@
+<div class="columns">
+  <% data.forEach(blog => { %>
+    <div class="column">
+      <h2><%= blog.title %></h2>
+      <h4><%= blog.blogger %></h4>
+      <img src="<%= blog.image %>" />
+      <p><%= blog.article %></p> 
+    </div>
+  <% }) %>
+</div>
