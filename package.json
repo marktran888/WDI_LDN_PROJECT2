@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "git@github.com:marktran888/WDI_LDN_PROJECT2.git",
   "author": "Mark Tran <mark.tran@hotmail.co.uk>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
