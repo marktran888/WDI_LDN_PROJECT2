@@ -6,6 +6,8 @@
   "author": "Mark Tran <mark.tran@hotmail.co.uk>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.2"
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-ejs-layouts": "^2.3.1"
   }
 }
