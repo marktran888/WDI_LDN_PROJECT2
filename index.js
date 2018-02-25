@@ -3,6 +3,9 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 const expressLayouts = require('express-ejs-layouts');
 const router = require('./config/router');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/blogger-app');
 
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views`);

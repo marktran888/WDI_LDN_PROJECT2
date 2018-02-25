@@ -6,8 +6,10 @@
   "author": "Mark Tran <mark.tran@hotmail.co.uk>",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
-    "express-ejs-layouts": "^2.3.1"
+    "express-ejs-layouts": "^2.3.1",
+    "mongoose": "^5.0.7"
   }
 }
