@@ -3,8 +3,11 @@
     <div class="column">
       <h2><%= blog.title %></h2>
       <h4><%= blog.blogger %></h4>
-      <img src="<%= blog.image %>" />
-      <p><%= blog.article %></p> 
+      <figure class="image is-128x128">
+        <img src="<%= blog.image %>" />
+      </figure>
+      <p><%= blog.description %></p>
+      <p><%= blog.article %></p>
     </div>
   <% }) %>
 </div>
