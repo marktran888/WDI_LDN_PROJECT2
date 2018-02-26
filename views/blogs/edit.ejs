@@ -5,15 +5,15 @@
     <input type="hidden" name="_method" value="PUT">
 
     <div class="field">
-      <label class="label">Name</label>
+      <label class="label">Title</label>
       <div class="control">
-        <input class="input" name="name" type="text" placeholder="Name" value="<%= blog.name %>" required>
+        <input class="input" name="title" type="text" placeholder="Name" value="<%= blog.title %>" required>
       </div>
     </div>
     <div class="field">
-      <label class="label">Country of Origin</label>
+      <label class="label">Blogger</label>
       <div class="control">
-        <input class="input" name="origin" type="text" placeholder="Country of Origin" value="<%= blog.origin %>" required>
+        <input class="input" name="blogger" type="text" placeholder="Name of Blogger" value="<%= blog.blogger %>" required>
       </div>
     </div>
     <div class="field">
@@ -23,9 +23,15 @@
       </div>
     </div>
     <div class="field">
-      <label class="label">Tasting Notes (380 chars max)</label>
+      <label class="label">Description</label>
       <div class="control">
-        <textarea class="textarea" name="tastingNotes" placeholder="Tasting Notes (380 chars max)" maxlength="380"><%= blog.tastingNotes %></textarea>
+        <textarea class="textarea" name"description" placeholder="Description (100 chars max)" maxlength="100"><%= blog.tastingNotes %></textarea>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Blog</label>
+      <div class="control">
+        <textarea class="textarea" name"article" placeholder="Blog (3000 chars max)" maxlength="3000"><%= blog.tastingNotes %></textarea>
       </div>
     </div>
     <div class="control">

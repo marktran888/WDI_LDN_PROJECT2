@@ -1,11 +1,15 @@
 const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 8000;
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser'); // makes sense of form data i.e. allows use to use req.body
 const methodOverride = require('method-override');
-const router = require('./config/router');
+const session = require('express-session');
+const flash = require('express-flash');
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+const router = require('./config/router');
+const userAuth = require('./lib/userAuth');
+const app = express();
+const PORT = process.env.PORT || 8000;
 
 mongoose.connect('mongodb://localhost/blogger-app');
 
@@ -28,9 +32,25 @@ app.use(methodOverride(function (req) {
   }
 }));
 
-app.get('/', (req, res) => res.render('pages/home'));
+app.use(session({
+  secret: '298rv^72e34s5t3(', // a random key used to encrypt the session cookie
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(flash());
+
+app.use(userAuth);
 
 app.use(router); // MUST BE PLACED JUST BEFORE app.listen
+
+
+//set up a global error catcher
+app.use((err, req, res, next) => { //eslint-disable-line
+  console.log(err);
+  if(err.name === 'ValidationError') return res.render('pages/422');
+  res.render('pages/500', { err });
+});
 
 // app.listen should always be the last line in this file
 app.listen(PORT, () => console.log(`Up and running on port ${PORT}`));
