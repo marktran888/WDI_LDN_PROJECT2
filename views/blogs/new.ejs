@@ -1,0 +1,37 @@
+<div class="container">
+  <form method="POST" action="/blogs">
+    <div class="field">
+      <label class="label">Title</label>
+      <div class="control">
+        <input class="input" name="title" type="text" placeholder="Title" required minlength="2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Blogger</label>
+      <div class="control">
+        <input class="input" name="blogger" type="text" placeholder="Name of Blogger" required minlength="2">
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Image</label>
+      <div class="control">
+        <input class="input" name="image" type="text" placeholder="Image" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Description</label>
+      <div class="control">
+        <textarea class="textarea" name="description" placeholder="Description (100 chars max)" maxlength="100"></textarea>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Blog</label>
+      <div class="control">
+        <textarea class="textarea" name="article" placeholder="Blog (3000 chars max)" maxlength="3000"></textarea>
+      </div>
+    </div>
+    <div class="control">
+      <button class="button is-primary">Submit</button>
+    </div>
+  </form>
+</div>

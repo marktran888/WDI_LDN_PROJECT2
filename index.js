@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 8000;
 const expressLayouts = require('express-ejs-layouts');
+const bodyParser = require('body-parser'); // makes sense of form data i.e. allows use to use req.body
 const router = require('./config/router');
 const mongoose = require('mongoose');
 
@@ -12,6 +13,9 @@ app.set('views', `${__dirname}/views`);
 app.use(expressLayouts);
 
 app.use(express.static(`${__dirname}/public`));
+
+//setup body bodyParser MUST BE BEFORE ROUTER
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => res.render('pages/home'));
 

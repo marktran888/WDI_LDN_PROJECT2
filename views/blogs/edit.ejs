@@ -1,0 +1,35 @@
+<div class="container">
+  <form method="POST" action="/blogs/<%= blog._id %>">
+
+    <%# for methodOverride %>
+    <input type="hidden" name="_method" value="PUT">
+
+    <div class="field">
+      <label class="label">Name</label>
+      <div class="control">
+        <input class="input" name="name" type="text" placeholder="Name" value="<%= blog.name %>" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Country of Origin</label>
+      <div class="control">
+        <input class="input" name="origin" type="text" placeholder="Country of Origin" value="<%= blog.origin %>" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Image</label>
+      <div class="control">
+        <input class="input" name="image" type="text" placeholder="Image" value="<%= blog.image %>" required>
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Tasting Notes (380 chars max)</label>
+      <div class="control">
+        <textarea class="textarea" name="tastingNotes" placeholder="Tasting Notes (380 chars max)" maxlength="380"><%= blog.tastingNotes %></textarea>
+      </div>
+    </div>
+    <div class="control">
+      <button class="button is-primary">Submit</button>
+    </div>
+  </form>
+</div>
