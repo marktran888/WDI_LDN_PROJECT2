@@ -12,6 +12,14 @@ router.route('/blogs')
 router.route('/blogs/new')
   .get(blogs.new);
 
+router.route('/blogs/:id')
+  .get(blogs.show)
+  .put(blogs.update);
+
+router.route('/blogs/:id/edit')
+  .get(blogs.edit);
+
+
 router.all('/*', (req, res) => res.render('pages/404'));
 
 module.exports = router;

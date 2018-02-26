@@ -18,8 +18,32 @@ function createRoute(req,res, next){
     .catch(next);
 }
 
+function showRoute(req, res, next) {
+  Blog.findById(req.params.id)
+    .then(blog => {
+      if(!blog) return res.render('pages/404');
+      res.render('blogs/show', { blog });
+    })
+    .catch(next);
+}
+
+function editRoute(req, res){
+  Blog.findById(req.params.id)
+    .then(blog => res.render('blogs/edit', { blog }));
+}
+
+function updateRoute(req, res){
+  Blog.findById(req.params.id)
+    .then(blog => Object.assign(blog, req.body))
+    .then(blog => blog.save())
+    .then(() => res.redirect(`/blogs/${req.params.id}`));
+}
+
 module.exports = {
   index: indexRoute,
   new: newRoute,
-  create: createRoute
+  create: createRoute,
+  show: showRoute,
+  edit: editRoute,
+  update: updateRoute
 };

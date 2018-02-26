@@ -25,7 +25,7 @@
         <hr />
 
         <ul class="comments">
-          <% blog.comments.forEach(comment => { %>
+          <% blogs.comments.forEach(comment => { %>
             <li>
             <div class="box">
               <% if(comment.isOwnedBy(locals.currentUser)) { %>
