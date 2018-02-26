@@ -1,12 +1,12 @@
 <div class="columns">
   <% data.forEach(blog => { %>
     <div class="column">
-      <h2><%= blog.title %></h2>
-      <h4><%= blog.blogger %></h4>
+      <h2 class="title"><%= blog.title %></h2>
+      <p><%= blog.description %></p>
+      <h4 class="subtitle"><%= blog.blogger %></h4>
       <figure class="image is-128x128">
         <img src="<%= blog.image %>" />
       </figure>
-      <p><%= blog.description %></p>
       <p><%= blog.article %></p>
     </div>
   <% }) %>
