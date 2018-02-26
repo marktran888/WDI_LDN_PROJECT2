@@ -11,7 +11,10 @@
       <div class="icon is-small">
         <i class="fa fa-pencil"></i>
       </div>
-      <p><%= blog.tastingNotes %></p>
+      <h2 class="title"><%= blog.title %></h2>
+      <h4 class="subtitle"><%= blog.blogger %></h4>
+      <h4><%= blog.description %></h>
+      <p><br><%= blog.article %></p>
 
 
       <% if(locals.isAuthenticated) { %>
