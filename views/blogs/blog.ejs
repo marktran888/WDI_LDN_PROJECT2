@@ -1,13 +1,24 @@
-<div class="columns">
-  <% data.forEach(blog => { %>
-    <div class="column">
-      <h2 class="title"><%= blog.title %></h2>
-      <p><%= blog.description %></p>
-      <h4 class="subtitle"><%= blog.blogger %></h4>
-      <figure class="image is-128x128">
-        <img src="<%= blog.image %>" />
-      </figure>
-      <p><%= blog.article %></p>
-    </div>
-  <% }) %>
-</div>
+<main class="container">
+  <div class="columns is-multiline">
+    <% data.forEach(blog => { %>
+      <div class="column is-one-quarter-desktop is-half-tablet">
+        <a href="/blogs/<%= blog._id %>">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-128x128">
+                <img src="<%= blog.image %>" alt="<%= blog.name %>" />
+              </figure>
+            </div>
+            <div class="card-content">
+              <h2 class="title"><%= blog.title %></h2>
+              <h4 class="subtitle"><%= blog.blogger %></h4>
+              <h4><%= blog.description %></h>
+            </div>
+            // move article to show
+            // <p><%= blog.article %></p>
+          </div>
+        </a>
+      </div>
+    <% }) %>
+  </div>
+</main>
