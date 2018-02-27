@@ -69,6 +69,34 @@ function commentsDeleteRoute(req, res, next){
     .catch(next);
 }
 
+// function moderate( req, res, next){
+//   if(!req.currentUser.isAdmin){
+//     Blog.findById(req.params.id)
+//       .then(blog => {
+//         req.flash('You do not have permissions to moderate');
+//         res.redirect(`/blogs/${blog._id}`);
+//       })
+//       .catch(next);
+//   }
+//   Blog.isModerated = true;
+// }
+
+function moderate(req, res, next) {
+  if(!req.currentUser.isAdmin){
+    req.flash('You do not have permisision to moderate');
+    return res.redirect(`/blogs/${req.params.id}`);
+  }
+
+  Blog.findById(req.params.id)
+    .then(blog => {
+      const comment = blog.comments.id(req.params.commentId);
+      comment.isModerated = true;
+      return blog.save();
+    })
+    .then(blog => res.redirect(`/blogs/${blog._id}`))
+    .catch(next);
+}
+
 module.exports = {
   index: indexRoute,
   new: newRoute,
@@ -78,5 +106,6 @@ module.exports = {
   update: updateRoute,
   delete: deleteRoute,
   commentsCreate: commentsCreateRoute,
-  commentsDelete: commentsDeleteRoute
+  commentsDelete: commentsDeleteRoute,
+  commentsModerate: moderate
 };

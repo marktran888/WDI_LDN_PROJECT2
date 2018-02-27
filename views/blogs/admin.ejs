@@ -1,0 +1,36 @@
+<% if(locals.isAuthenticated && users.admin) { %>
+  <div class="container">
+    <form method="POST" action="/cheeses">
+      <div class="field">
+        <label class="label">Category</label>
+        <select name="category">
+          <option selected disabled>Please choose</option>
+          <% categories.forEach(category => { %>
+            <option value="<%= category._id %>"><%= category.name %></option>
+          <% }) %>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label">Title</label>
+        <input class="input" name="title" type="text" placeholder="Title" required minlength="2">
+      </div>
+      <div class="field">
+        <label class="label">Blogger</label>
+        <input class="input" name="blogger" type="text" placeholder="Name of Blogger" required minlength="2">
+      </div>
+      <div class="field">
+        <label class="label">Image</label>
+        <input class="input" name="image" type="text" placeholder="Image" required pattern="^http">
+      </div>
+      <div class="field">
+        <label class="label">Description (100 chars max)</label>
+        <textarea class="textarea" name="tastingNotes" placeholder="Description (100 chars max)" maxlength="100"></textarea>
+      </div>
+      <div class="field">
+        <label class="label">Blog (3000 chars max)</label>
+        <textarea class="textarea" name="article" placeholder="Blog (3000 chars max)" maxlength="3000"></textarea>
+      </div>
+      <button class="button is-primary">Submit</button>
+    </form>
+  </div>
+<% } %>

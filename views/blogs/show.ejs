@@ -28,32 +28,38 @@
         <hr />
 
         <ul class="comments">
+          <h2 class="subtitle">Comments</h2>
           <% blog.comments.forEach(comment => { %>
             <li>
               <div class="box">
-                <% if(comment.isOwnedBy(locals.currentUser)) { %>
+                <% if(comment.isOwnedBy(locals.currentUser || locals.currentUser.isAdmin)) { %>
                   <form class="delete" method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>">
                     <input type="hidden" name="_method" value="DELETE">
                     <button class="delete">x</button>
                   </form>
                 <% } %>
-                <article class="media">
-                  <div class="media-left">
-                    <figure class="image is-64x64">
-                      <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
-                    </figure>
-                  </div>
-                  <div class="media-content">
-                    <div class="content">
-                      <p>
-                        <%= comment.content %>
-                      </p>
-                      <% if(comment.user) { %>
-                      <strong><%= comment.user.username %></strong>
-                      <% } %>
+                <% if(locals.currentUser.isAdmin){ %>
+                  <form class="delete" method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>/moderate">
+                    <input type="hidden" name="_method" value="PATCH">
+                    <button class="moderate">Moderate</button>
+                  </form>
+                <% } %>
+
+                <% if(comment.isModerated){ %>
+                  <article class="media">
+                    <div class="media-content">
+                      <div class="content">
+                        <p>
+                          <%= comment.content %>
+                        </p>
+                        <% if(comment.user) { %>
+                        <strong><%= comment.user.username %></strong>
+                        <% } %>
+                      </div>
                     </div>
-                  </div>
-                </article>
+                  </article>
+                <% } %>
+
               </div>
             </li>
           <% }) %>

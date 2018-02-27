@@ -4,8 +4,11 @@ const bcrypt = require('bcrypt');
 const schema = new mongoose.Schema({
   username: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+  password: { type: String, required: true },
+  isAdmin: { type: Boolean, default: false }
 });
+// add user to admin group on database
+// db.users.update({ username: 'admin' }, { $set: { admin: 'True' } })
 
 // set up the passwordConfirmation virtual
 schema

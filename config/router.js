@@ -2,12 +2,14 @@ const router = require('express').Router();
 const blogs = require('../controllers/blogs');
 const registrations = require('../controllers/registrations');
 const sessions = require('../controllers/sessions');
+// const catergory = require('../controllers/catergory');
 const secureRoute = require('../lib/secureRoute');
 
 // request handlers
 router.get('/', (req, res) => res.render('pages/home'));
 
 router.route('/blogs/new')
+  // .get(secureRoute, catergory.new);
   .get(secureRoute, blogs.new);
 
 router.route('/blogs')
@@ -21,6 +23,7 @@ router.route('/blogs/:id')
   .delete(secureRoute, blogs.delete);
 
 router.route('/blogs/:id/edit')
+// .get(secureRoute, catergory.edit);
   .get(secureRoute, blogs.edit);
 
 router.route('/blogs/:id/comments')
@@ -28,6 +31,9 @@ router.route('/blogs/:id/comments')
 
 router.route('/blogs/:id/comments/:commentId')
   .delete(secureRoute, blogs.commentsDelete);
+
+router.route('/blogs/:id/comments/:commentId/:moderate')
+  .patch(secureRoute, blogs.commentsModerate);
 
 router.route('/register')
   .get(registrations.new)
