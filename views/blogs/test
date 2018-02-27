@@ -10,3 +10,6 @@
     <button class="button">filter</button>
   </div>
 </form>
+
+
+<h2 class="subtitle">Category: <%= blog.category.name %></h2>
