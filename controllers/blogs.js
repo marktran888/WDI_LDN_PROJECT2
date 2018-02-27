@@ -1,13 +1,36 @@
 const Blog = require('../models/blog');
+const Category = require('../models/category');
+const Promise = require('bluebird');
 
 function indexRoute(req, res) {
-  //Use Blog model to get the data from the database
-  Blog.find()
-    .then(blogs => res.render('blogs/index', { blogs: blogs }));
+  Promise.props({
+    categories: Category.find().exec(),
+    blogs: Blog.find(req.query).exec()
+  })
+    .then(data => {
+      res.render('blogs/index', {
+        blogs: data.blogs,
+        categories: data.categories,
+        selectedCategory: req.query.category
+      });
+    });
 }
 
+// function filterRoute(req, res) {
+//   console.log(req.query);
+//   Blog.find(req.query)
+//     .then(blogs => res.render('blogs/index', { blogs }));
+//
+//   // const selection = req.body.category;
+//   // Blog.find()
+//   //   .populate('category')
+//   //   .then(category)
+// }
+
 function newRoute(req, res){
-  res.render('blogs/new');
+  Category.find()
+    .then(categories => res.render('blogs/new', { categories }));
+  // res.render('blogs/new');
 }
 
 function createRoute(req,res, next){
@@ -21,6 +44,7 @@ function createRoute(req,res, next){
 function showRoute(req, res, next) {
   Blog.findById(req.params.id)
     .populate('comments.user') // populate with object info
+    .populate('category')
     .then(blog => {
       if(!blog) return res.render('pages/404');
       res.render('blogs/show', { blog });
@@ -28,9 +52,19 @@ function showRoute(req, res, next) {
     .catch(next);
 }
 
-function editRoute(req, res){
-  Blog.findById(req.params.id)
-    .then(blog => res.render('blogs/edit', { blog }));
+
+// function editRoute(req, res){
+//   Blog.findById(req.params.id)
+//     .then(blog => res.render('blogs/edit', { blog }));
+// }
+
+function editRoute(req, res) {
+  // get both blogs and categories in parallel
+  Promise.props({
+    blog: Blog.findById(req.params.id),
+    categories: Category.find()
+  })
+    .then(data => res.render('blogs/edit', data)); // inject the data into the view
 }
 
 function updateRoute(req, res){
@@ -69,18 +103,6 @@ function commentsDeleteRoute(req, res, next){
     .catch(next);
 }
 
-// function moderate( req, res, next){
-//   if(!req.currentUser.isAdmin){
-//     Blog.findById(req.params.id)
-//       .then(blog => {
-//         req.flash('You do not have permissions to moderate');
-//         res.redirect(`/blogs/${blog._id}`);
-//       })
-//       .catch(next);
-//   }
-//   Blog.isModerated = true;
-// }
-
 function moderate(req, res, next) {
   if(!req.currentUser.isAdmin){
     req.flash('You do not have permisision to moderate');
@@ -108,4 +130,5 @@ module.exports = {
   commentsCreate: commentsCreateRoute,
   commentsDelete: commentsDeleteRoute,
   commentsModerate: moderate
+  // filter: filterRoute
 };

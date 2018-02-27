@@ -16,6 +16,8 @@ router.route('/blogs')
   .get(blogs.index)
   .post(secureRoute, blogs.create);
 
+// router.route('/blogs/category')
+//   .post(blogs.filter);
 
 router.route('/blogs/:id')
   .get(blogs.show)

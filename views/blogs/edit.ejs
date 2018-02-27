@@ -3,7 +3,15 @@
 
     <%# for methodOverride %>
     <input type="hidden" name="_method" value="PUT">
-
+    <div class="field">
+      <label class="label">Category</label>
+      <select name="category">
+        <option selected disabled>Please choose</option>
+        <% categories.forEach(category => { %>
+          <option value="<%= category._id %>"><%= category.name %></option>
+        <% }) %>
+      </select>
+    </div>
     <div class="field">
       <label class="label">Title</label>
       <div class="control">

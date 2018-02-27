@@ -1,0 +1,12 @@
+<form>
+  <div class="field">
+    <label class="label">Category</label>
+    <select name="category">
+      <option selected disabled>Please choose</option>
+      <% categories.forEach(category => { %>
+        <option<% if(category === selectedCategory) {%> selected <%} %>><%= category %></option>
+      <% }) %>
+    </select>
+    <button class="button">filter</button>
+  </div>
+</form>

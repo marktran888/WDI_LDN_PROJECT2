@@ -19,13 +19,13 @@ const schema = new mongoose.Schema({
   image: { type: String, pattern: /^https?:\/\/.+/ },
   description: { type: String, required: true},
   article: { type: String, required: true },
-  comments: [ commentSchema ]
+  comments: [ commentSchema ],
   // comments: [ commentSchema ],
 
   //referenced data
 
-  // category: { type: mongoose.Schema.ObjectId, ref: 'Category', required: true },
-  // isApproved: { type: mongoose.Schema.ObjectId, ref: 'isApproved', required: true }
+  category: { type: mongoose.Schema.ObjectId, ref: 'Category' }
+  // category: { type: mongoose.Schema.ObjectId, ref: 'Category', required: true }
 });
 
 module.exports = mongoose.model('Blog', schema);
