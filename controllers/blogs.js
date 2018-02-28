@@ -5,7 +5,7 @@ const Promise = require('bluebird');
 function indexRoute(req, res) {
   Promise.props({
     categories: Category.find().exec(),
-    blogs: Blog.find(req.query).exec()
+    blogs: Blog.find(req.query).populate('category').exec()
   })
     .then(data => {
       res.render('blogs/index', {
@@ -16,21 +16,9 @@ function indexRoute(req, res) {
     });
 }
 
-// function filterRoute(req, res) {
-//   console.log(req.query);
-//   Blog.find(req.query)
-//     .then(blogs => res.render('blogs/index', { blogs }));
-//
-//   // const selection = req.body.category;
-//   // Blog.find()
-//   //   .populate('category')
-//   //   .then(category)
-// }
-
 function newRoute(req, res){
   Category.find()
     .then(categories => res.render('blogs/new', { categories }));
-  // res.render('blogs/new');
 }
 
 function createRoute(req,res, next){
@@ -52,11 +40,6 @@ function showRoute(req, res, next) {
     .catch(next);
 }
 
-
-// function editRoute(req, res){
-//   Blog.findById(req.params.id)
-//     .then(blog => res.render('blogs/edit', { blog }));
-// }
 
 function editRoute(req, res) {
   // get both blogs and categories in parallel
@@ -130,5 +113,4 @@ module.exports = {
   commentsCreate: commentsCreateRoute,
   commentsDelete: commentsDeleteRoute,
   commentsModerate: moderate
-  // filter: filterRoute
 };

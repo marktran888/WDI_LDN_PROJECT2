@@ -11,13 +11,10 @@
       <div class="icon is-small">
         <i class="fa fa-pencil"></i>
       </div>
-      <h2 class="title"><%= blog.title %></h2>
+      <h2 class="title is-2"><%= blog.title %></h2>
 
-
-      <h4 class="subtitle"><%= blog.blogger %></h4>
-      <h4><%= blog.description %></h>
-      <p><br><%= blog.article %></p>
-
+      <h4 class="subtitle">By <%= blog.blogger %></h4>
+      <h2 class="subtitle italic"><%= blog.category.name %></h2>
 
       <% if(locals.isAuthenticated) { %>
         <a href="/blogs/<%= blog._id %>/edit" class="button is-primary">Edit</a>
@@ -33,36 +30,37 @@
           <h2 class="subtitle">Comments</h2>
           <% blog.comments.forEach(comment => { %>
             <li>
-              <div class="box">
-                <% if(comment.isOwnedBy(locals.currentUser) || locals.currentUser.isAdmin) { %>
-                  <form class="delete" method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button class="delete">x</button>
-                  </form>
-                <% } %>
-                <% if(locals.currentUser.isAdmin && !comment.isModerated){ %>
-                  <form class="delete" method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>/moderate">
-                    <input type="hidden" name="_method" value="PATCH">
-                    <button class="moderate">Moderate</button>
-                  </form>
-                <% } %>
+              <% if(comment.isModerated || locals.currentUser.isAdmin || comment.isOwnedBy(locals.currentUser)) { %>
+                <div class="box">
+                  <% if(comment.isOwnedBy(locals.currentUser) || locals.currentUser.isAdmin) { %>
+                    <form class="delete" method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>">
+                      <input type="hidden" name="_method" value="DELETE">
+                      <button class="delete">x</button>
+                    </form>
+                  <% } %>
+                  <% if(locals.currentUser.isAdmin && !comment.isModerated){ %>
+                    <form class="delete" method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>/moderate">
+                      <input type="hidden" name="_method" value="PATCH">
+                      <button class="moderate">Moderate</button>
+                    </form>
+                  <% } %>
 
-                <% if(comment.isModerated || locals.currentUser.isAdmin ||comment.isOwnedBy(locals.currentUser)){ %>
-                  <article class="media">
-                    <div class="media-content">
-                      <div class="content">
-                        <p>
-                          <%= comment.content %>
-                        </p>
-                        <% if(comment.user) { %>
-                        <strong><%= comment.user.username %></strong>
-                        <% } %>
+                  <% if(comment.isModerated || locals.currentUser.isAdmin ||comment.isOwnedBy(locals.currentUser)){ %>
+                    <article class="media">
+                      <div class="media-content">
+                        <div class="content">
+                          <p>
+                            <%= comment.content %>
+                          </p>
+                          <% if(comment.user) { %>
+                          <strong><%= comment.user.username %></strong>
+                          <% } %>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                <% } %>
-
-              </div>
+                    </article>
+                  <% } %>
+                </div>
+              <% } %>
             </li>
           <% }) %>
         </ul>
@@ -74,4 +72,6 @@
       <% } %>
     </div>
   </div>
+  <h4 class="subtitle is-2"><%= blog.description %></h4>
+  <p><br><%= blog.article %></p>
 </div>

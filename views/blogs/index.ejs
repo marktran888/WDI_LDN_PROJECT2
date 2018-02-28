@@ -9,11 +9,11 @@
 </form>
 
 <main class="container">
-  <div class="columns is-multiline">
+  <div class="columns is-multiline tile is-ancestor">
     <% blogs.forEach(blog => { %>
-      <div class="column is-one-quarter-desktop is-half-tablet">
+      <div class="column is-one-quarter-desktop is-half-tablet tile is-parent">
         <a href="/blogs/<%= blog._id %>">
-          <div class="card">
+          <div class="card tile is-child">
             <div class="card-image">
               <figure class="image">
                 <img src="<%= blog.image %>" alt="<%= blog.name %>" />
@@ -21,7 +21,8 @@
             </div>
             <div class="card-content">
               <h2 class="title"><%= blog.title %></h2>
-              <h4 class="subtitle"><%= blog.blogger %></h4>
+              <h2 class="subtitle italic"><%= blog.category.name %></h2>
+              <h4 class="subtitle">By <%= blog.blogger %></h4>
               <h4><%= blog.description %></h>
             </div>
           </div>

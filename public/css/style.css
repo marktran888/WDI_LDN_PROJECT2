@@ -1,4 +1,33 @@
+.navbar {
+  background: #C0C0C0;
+  margin-bottom: 40px;
+}
+
+.boxshadow {
+  position: relative;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  padding: 10px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-style: bold;
+}
+
+.marker {
+  font-family: 'Permanent Marker', cursive;
+}
+
 .hero.homepage {
   background-image: url(https://wallpaper.wiki/wp-content/uploads/2017/06/Futuristic-Tech-Wallpapers-Images.jpg);
   background-size: cover;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  background-color: grey;
 }
