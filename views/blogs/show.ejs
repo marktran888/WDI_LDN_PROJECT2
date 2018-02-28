@@ -1,7 +1,7 @@
 <div class="container">
   <div class="columns">
     <div class="column">
-      <figure class="image">
+      <figure class="image grey">
         <img src="<%= blog.image %>" alt="<%= blog.name %>">
       </figure>
     </div>
@@ -11,17 +11,17 @@
       <div class="icon is-small">
         <i class="fa fa-pencil"></i>
       </div>
-      <h2 class="title is-2"><%= blog.title %></h2>
+      <h2 class="title is-2 marker"><%= blog.title %></h2>
 
-      <h4 class="subtitle">By <%= blog.blogger %></h4>
+      <h4 class="subtitle bold">By <%= blog.blogger %></h4>
       <h2 class="subtitle italic"><%= blog.category.name %></h2>
 
       <% if(locals.isAuthenticated) { %>
-        <a href="/blogs/<%= blog._id %>/edit" class="button is-primary">Edit</a>
+        <a href="/blogs/<%= blog._id %>/edit" class="btn">Edit</a>
 
         <form method="POST" action="/blogs/<%= blog._id %>">
           <input type="hidden" name="_method" value="DELETE">
-          <button class="button is-danger">Delete</button>
+          <button class="btn">Delete</button>
         </form>
 
         <hr />
@@ -33,15 +33,15 @@
               <% if(comment.isModerated || locals.currentUser.isAdmin || comment.isOwnedBy(locals.currentUser)) { %>
                 <div class="box">
                   <% if(comment.isOwnedBy(locals.currentUser) || locals.currentUser.isAdmin) { %>
-                    <form class="delete" method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>">
+                    <form method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>">
                       <input type="hidden" name="_method" value="DELETE">
-                      <button class="delete">x</button>
+                      <button class="btn">Delete</button>
                     </form>
                   <% } %>
                   <% if(locals.currentUser.isAdmin && !comment.isModerated){ %>
-                    <form class="delete" method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>/moderate">
+                    <form method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>/moderate">
                       <input type="hidden" name="_method" value="PATCH">
-                      <button class="moderate">Moderate</button>
+                      <button class="btn">Moderate</button>
                     </form>
                   <% } %>
 
@@ -53,7 +53,7 @@
                             <%= comment.content %>
                           </p>
                           <% if(comment.user) { %>
-                          <strong><%= comment.user.username %></strong>
+                            <strong><%= comment.user.username %></strong>
                           <% } %>
                         </div>
                       </div>
@@ -67,7 +67,7 @@
 
         <form method="POST" action="/blogs/<%= blog._id %>/comments">
         <textarea class="textarea" name="content"></textarea>
-        <button class="button is-primary">Submit</button>
+        <button class="btn">Submit</button>
         </form>
       <% } %>
     </div>

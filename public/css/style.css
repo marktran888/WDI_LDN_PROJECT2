@@ -1,11 +1,11 @@
 .navbar {
-  background: #C0C0C0;
+  background: rgba(70,130,180, 0.1);
   margin-bottom: 40px;
 }
 
 .boxshadow {
   position: relative;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 4px 5px 6px rgba(0, 0, 0, .5);
   padding: 10px;
 }
 
@@ -14,7 +14,16 @@
 }
 
 .bold {
-  font-style: bold;
+  font-weight: bold;
+}
+
+.center {
+  float: left;
+}
+
+.grey {
+  line-height: 0;
+  box-shadow: 4px 5px 6px rgba(0, 0, 0, .5);
 }
 
 .marker {
@@ -30,4 +39,37 @@
   width: 100%;
   height: 400px;
   background-color: grey;
+}
+
+.btn {
+  background: #1793e6;
+  background-image: -webkit-linear-gradient(top, #1793e6, #346f94);
+  background-image: -moz-linear-gradient(top, #1793e6, #346f94);
+  background-image: -ms-linear-gradient(top, #1793e6, #346f94);
+  background-image: -o-linear-gradient(top, #1793e6, #346f94);
+  background-image: linear-gradient(to bottom, #1793e6, #346f94);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Courier New;
+  color: #ffffff;
+  font-size: 13px;
+  padding: 5px 20px 5px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+.sub {
+  margin-top: 10px;
+  margin-bottom: 5px !important;
+  font-color: black;
 }

@@ -88,7 +88,7 @@ function commentsDeleteRoute(req, res, next){
 
 function moderate(req, res, next) {
   if(!req.currentUser.isAdmin){
-    req.flash('You do not have permisision to moderate');
+    req.flash('You do not have permission to moderate');
     return res.redirect(`/blogs/${req.params.id}`);
   }
 
