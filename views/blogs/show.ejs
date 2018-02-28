@@ -1,31 +1,28 @@
 <div class="container">
-  <div class="columns">
-    <div class="column">
-      <figure class="image grey">
-        <img src="<%= blog.image %>" alt="<%= blog.name %>">
-      </figure>
-    </div>
     <div class="column">
       <h3 class="title"><%= blog.name %></h3>
-      <h4 class="subtitle"><%= blog.origin %></h4>
-      <div class="icon is-small">
-        <i class="fa fa-pencil"></i>
-      </div>
       <h2 class="title is-2 marker"><%= blog.title %></h2>
-
       <h4 class="subtitle bold">By <%= blog.blogger %></h4>
       <h2 class="subtitle italic"><%= blog.category.name %></h2>
 
-      <% if(locals.isAuthenticated) { %>
-        <a href="/blogs/<%= blog._id %>/edit" class="btn">Edit</a>
+      <figure class="image grey">
+        <img src="<%= blog.image %>" alt="<%= blog.name %>">
+      </figure><br>
 
+      <% if(locals.isAuthenticated) { %>
+        <% if(locals.currentUser.isAdmin) { %>
+        <a href="/blogs/<%= blog._id %>/edit" class="btn">Edit</a><br><br>
         <form method="POST" action="/blogs/<%= blog._id %>">
           <input type="hidden" name="_method" value="DELETE">
           <button class="btn">Delete</button>
         </form>
-
         <hr />
-
+        <% } %>
+        <div>
+        <h4 class="subtitle is-2"><%= blog.description %></h4>
+        <p><%= blog.article %></p>
+        </div>
+        <hr />
         <ul class="comments">
           <h2 class="subtitle">Comments</h2>
           <% blog.comments.forEach(comment => { %>
@@ -66,12 +63,10 @@
         </ul>
 
         <form method="POST" action="/blogs/<%= blog._id %>/comments">
-        <textarea class="textarea" name="content"></textarea>
+        <textarea class="textarea" name="content"></textarea><br>
         <button class="btn">Submit</button>
         </form>
       <% } %>
-    </div>
-  </div>
-  <h4 class="subtitle is-2"><%= blog.description %></h4>
-  <p><br><%= blog.article %></p>
+
+
 </div>

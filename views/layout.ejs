@@ -17,11 +17,12 @@
   </head>
   <body>
     <%- include ./partials/_navbar %>
-
+    <div class="main-body">
     <% for (const type in messages) { %>
       <div class="notification is-<%= type %>"><%= messages[type] %></div>
     <% } %>
-
+    <div class="filler"></div>
     <%- body -%>
+  </div>
   </body>
 </html>
