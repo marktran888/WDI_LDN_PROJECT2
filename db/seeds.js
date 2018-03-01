@@ -25,7 +25,7 @@ const categoryData = require('./data/category');
 //     .finally(() => mongoose.connection.close());
 // });
 
-mongoose.connect('mongodb://localhost/bach-database', (err, db) => {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/blogger-app', (err, db) => {
   db.dropDatabase();
 
   Category.create(categoryData)
