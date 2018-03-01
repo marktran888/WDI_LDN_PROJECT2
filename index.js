@@ -11,7 +11,7 @@ const userAuth = require('./lib/userAuth');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-mongoose.connect('mongodb://localhost/blogger-app');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/blogger-app');
 
 app.set('view engine', 'ejs');
 app.set('views', `${__dirname}/views`);

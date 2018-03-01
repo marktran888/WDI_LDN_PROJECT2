@@ -5,6 +5,9 @@
   "repository": "git@github.com:marktran888/WDI_LDN_PROJECT2.git",
   "author": "Mark Tran <mark.tran@hotmail.co.uk>",
   "license": "MIT",
+  "scripts": {
+    "start": "node index"
+  },
   "dependencies": {
     "bcrypt": "^1.0.3",
     "bluebird": "^3.5.1",
