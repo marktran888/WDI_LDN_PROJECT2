@@ -8,6 +8,8 @@
       <figure class="image grey">
         <img src="<%= blog.image %>" alt="<%= blog.name %>">
       </figure><br>
+      <h4 class="subtitle is-2"><%= blog.description %></h4>
+      <p><%= blog.article %></p>
 
       <% if(locals.isAuthenticated) { %>
         <% if(locals.currentUser.isAdmin) { %>
@@ -16,12 +18,7 @@
           <input type="hidden" name="_method" value="DELETE">
           <button class="btn">Delete</button>
         </form>
-        <hr />
         <% } %>
-        <div>
-        <h4 class="subtitle is-2"><%= blog.description %></h4>
-        <p><%= blog.article %></p>
-        </div>
         <hr />
         <ul class="comments">
           <h2 class="subtitle">Comments</h2>
@@ -32,7 +29,7 @@
                   <% if(comment.isOwnedBy(locals.currentUser) || locals.currentUser.isAdmin) { %>
                     <form method="POST" action="/blogs/<%= blog._id %>/comments/<%= comment._id %>">
                       <input type="hidden" name="_method" value="DELETE">
-                      <button class="btn">Delete</button>
+                      <button class="btn">Delete</button><br><br>
                     </form>
                   <% } %>
                   <% if(locals.currentUser.isAdmin && !comment.isModerated){ %>
