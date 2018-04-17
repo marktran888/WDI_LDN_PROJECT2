@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const marked = require('marked');
 
 const commentSchema = new mongoose.Schema({
   content: { type: String },
@@ -22,5 +23,10 @@ const schema = new mongoose.Schema({
   category: { type: mongoose.Schema.ObjectId, ref: 'Category' }
   // category: { type: mongoose.Schema.ObjectId, ref: 'Category', required: true }
 });
+
+schema.virtual('articleHTML')
+  .get(function() {
+    return marked(this.article);
+  });
 
 module.exports = mongoose.model('Blog', schema);

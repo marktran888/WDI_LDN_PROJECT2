@@ -8,7 +8,7 @@
       <img src="<%= blog.image %>" alt="<%= blog.name %>">
     </figure><br>
     <h4 class="subtitle is-2"><%= blog.description %></h4>
-    <p><%= blog.article %></p>
+    <p><%- blog.articleHTML %></p>
     <% if(locals.isAuthenticated) { %>
       <% if(locals.currentUser.isAdmin) { %>
         <a href="/blogs/<%= blog._id %>/edit" class="btn">Edit</a><br><br>
