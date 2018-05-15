@@ -8,6 +8,7 @@ https://mtblogging-app.herokuapp.com/
 
 - Clone or download the repo
 - Install dependencies with `yarn install`
+- Start `mongodb`
 - Launch the app with `nodemon` and browse to localhost:8000
 
 ### Blogs:
